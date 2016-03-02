@@ -118,11 +118,13 @@ const startBot = (token) => {
   })
 
   bot.onText(/\/caniuse (.+)/, (msg, match) => {
-    bot.sendMessage(msg.from.id,
-      searchFeature(normalizeStr(match[1]), db.data)[0]._text, {
+    const firstResult = searchFeature(normalizeStr(match[1]), db.data)
+    if (firstResult) {
+      bot.sendMessage(msg.from.id, firstResult._text, {
         parse_mode: 'Markdown',
         disable_web_page_preview: true
       })
+    }
   })
 }
 
