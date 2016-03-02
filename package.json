@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/viller239/caniuse-telegram-bot"
   },
+  "scripts": {
+    "test": "standard **/*.js"
+  },
   "keywords": [
     "caniuse",
     "telegram",

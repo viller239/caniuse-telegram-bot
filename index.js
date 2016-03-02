@@ -11,7 +11,7 @@ const db = require('caniuse-db/data.json')
 
 const inlineQueryCacheTime = isProd ? 3600 : 20
 
-const digets = '⁰¹²³⁴⁵⁶⁷⁸⁹'
+const digits = '⁰¹²³⁴⁵⁶⁷⁸⁹'
 const icons = {
   y: '✔',
   n: '✘',
@@ -48,7 +48,7 @@ const makeSupportStr = (stat, browser) => `*${browser.browser}*  ` +
       str += '+'
     }
     if (pivot.support.includes('#')) {
-      str += pivot.support.match(/#\d/g).map((match) => digets[match[1]]).join('')
+      str += pivot.support.match(/#\d/g).map((match) => digits[match[1]]).join('')
     }
     return str
   }).join('   ')
@@ -118,11 +118,13 @@ const startBot = (token) => {
   })
 
   bot.onText(/\/caniuse (.+)/, (msg, match) => {
-    bot.sendMessage(msg.from.id,
-      searchFeature(normalizeStr(match[1]), db.data)[0]._text, {
+    const firstResult = searchFeature(normalizeStr(match[1]), db.data)
+    if (firstResult) {
+      bot.sendMessage(msg.from.id, firstResult._text, {
         parse_mode: 'Markdown',
         disable_web_page_preview: true
       })
+    }
   })
 }
 
@@ -133,7 +135,7 @@ _.forEach(db.data, (f, key) => {
   f._nDescription = normalizeStr(f.description)
   f._nKeywords = normalizeStr(f.keywords)
   f._usage = `${icons.y} ${f.usage_perc_y.toFixed(2)}% ${icons.a} ${f.usage_perc_a.toFixed(2)}%`
-  f._notes = _.map(f.notes_by_num, (note, key) => `${digets[key]} ${note}`).join('\n')
+  f._notes = _.map(f.notes_by_num, (note, key) => `${digits[key]} ${note}`).join('\n')
   f._status = db.statuses[f.status]
   f._desktopSupport = _.compact(_.map(f.stats, (stat, browserId) => {
     const browser = db.agents[browserId]
