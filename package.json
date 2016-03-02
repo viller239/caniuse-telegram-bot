@@ -24,5 +24,8 @@
     "caniuse-db": "~1.0.x",
     "lodash": "4.6.0",
     "node-telegram-bot-api": "0.20.1"
+  },
+  "devDependencies": {
+    "standard": "^6.0.7"
   }
 }
