@@ -1,0 +1,25 @@
+{
+  "name": "caniuse-telegram-bot",
+  "version": "1.0.0",
+  "description": "caniuse.com in Telegram",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viller239/caniuse-telegram-bot"
+  },
+  "keywords": [
+    "caniuse",
+    "telegram",
+    "bot"
+  ],
+  "author": "Anton Viller",
+  "bugs": {
+    "url": "https://github.com/viller239/caniuse-telegram-bot/issues"
+  },
+  "homepage": "https://github.com/viller239/caniuse-telegram-bot#readme",
+  "dependencies": {
+    "caniuse-db": "~1.0.x",
+    "lodash": "4.6.0",
+    "node-telegram-bot-api": "0.20.1"
+  }
+}
